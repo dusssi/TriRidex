@@ -12,8 +12,6 @@ const Captainlogin = () => {
   const { captain, setCaptain } = React.useContext(CaptainDataContext)
   const navigate = useNavigate()
 
-
-
   const submitHandler = async (e) => {
     e.preventDefault();
     const captain = {
@@ -36,21 +34,17 @@ const Captainlogin = () => {
     setPassword('')
   }
   return (
-    <div className='p-7 h-screen flex flex-col justify-between'>
-      <div>
-        <img className='w-20 mb-3' src="https://www.svgrepo.com/show/505031/uber-driver.svg" alt="" />
-
-        <form onSubmit={(e) => {
-          submitHandler(e)
-        }}>
+    <div className='p-7 h-screen flex flex-col justify-between bg-gray-900 text-white'>
+      <div className='flex flex-col items-center'>
+        <h1 className='text-4xl font-bold mb-3' style={{ fontFamily: 'Google Sans, sans-serif' }}>TriRidex <span className='text-blue-500'>&rarr;</span></h1>
+        
+        <form onSubmit={(e) => { submitHandler(e) }} className='w-full max-w-md'>
           <h3 className='text-lg font-medium mb-2'>What's your email</h3>
           <input
             required
             value={email}
-            onChange={(e) => {
-              setEmail(e.target.value)
-            }}
-            className='bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base'
+            onChange={(e) => { setEmail(e.target.value) }}
+            className='bg-gray-800 mb-7 rounded-lg px-4 py-2 border border-gray-600 w-full text-lg placeholder:text-base text-white'
             type="email"
             placeholder='email@example.com'
           />
@@ -58,26 +52,23 @@ const Captainlogin = () => {
           <h3 className='text-lg font-medium mb-2'>Enter Password</h3>
 
           <input
-            className='bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base'
+            className='bg-gray-800 mb-7 rounded-lg px-4 py-2 border border-gray-600 w-full text-lg placeholder:text-base text-white'
             value={password}
-            onChange={(e) => {
-              setPassword(e.target.value)
-            }}
+            onChange={(e) => { setPassword(e.target.value) }}
             required type="password"
             placeholder='password'
           />
 
           <button
-            className='bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'
+            className='bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg'
           >Login</button>
-
         </form>
-        <p className='text-center'>Join a fleet? <Link to='/captain-signup' className='text-blue-600'>Register as a Captain</Link></p>
+        <p className='text-center'>Join a fleet? <Link to='/captain-signup' className='text-blue-400'>Register as a Captain</Link></p>
       </div>
       <div>
         <Link
           to='/login'
-          className='bg-[#d5622d] flex items-center justify-center text-white font-semibold mb-5 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'
+          className='bg-[#d5622d] flex items-center justify-center text-white font-semibold mb-5 rounded-lg px-4 py-2 w-full text-lg'
         >Sign in as User</Link>
       </div>
     </div>

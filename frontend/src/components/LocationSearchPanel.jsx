@@ -1,30 +1,49 @@
-import React from 'react'
+import React, { memo } from "react";
 
-const LocationSearchPanel = ({ suggestions, setVehiclePanel, setPanelOpen, setPickup, setDestination, activeField }) => {
+const LocationSearchPanel = ({
+    suggestions = [],
+    setVehiclePanel,
+    setPanelOpen,
+    setPickup,
+    setDestination,
+    activeField
+}) => {
 
     const handleSuggestionClick = (suggestion) => {
-        if (activeField === 'pickup') {
-            setPickup(suggestion)
-        } else if (activeField === 'destination') {
-            setDestination(suggestion)
+        if (!suggestion) return; // Prevent setting empty values
+
+        if (activeField === "pickup") {
+            setPickup(suggestion);
+        } else if (activeField === "destination") {
+            setDestination(suggestion);
         }
-        // setVehiclePanel(true)
-        // setPanelOpen(false)
-    }
+
+        setPanelOpen(false);
+        setVehiclePanel(true);
+    };
 
     return (
-        <div>
-            {/* Display fetched suggestions */}
-            {
-                suggestions.map((elem, idx) => (
-                    <div key={idx} onClick={() => handleSuggestionClick(elem)} className='flex gap-4 border-2 p-3 border-gray-50 active:border-black rounded-xl items-center my-2 justify-start'>
-                        <h2 className='bg-[#eee] h-8 flex items-center justify-center w-12 rounded-full'><i className="ri-map-pin-fill"></i></h2>
-                        <h4 className='font-medium'>{elem}</h4>
-                    </div>
+        <div className="bg-gray-900 text-white p-4 rounded-lg shadow-lg">
+            {suggestions.length > 0 ? (
+                suggestions.map((suggestion, index) => (
+                    <button
+                        key={index}
+                        onClick={() => handleSuggestionClick(suggestion)}
+                        className="flex gap-4 border-2 p-3 border-gray-700 active:border-gray-400 rounded-xl items-center my-2 cursor-pointer hover:bg-gray-800 transition-all focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        role="option"
+                        aria-label={`Select location: ${suggestion}`}
+                    >
+                        <span className="bg-gray-700 h-8 flex items-center justify-center w-12 rounded-full text-white">
+                            <i className="ri-map-pin-fill"></i>
+                        </span>
+                        <span className="font-medium">{suggestion}</span>
+                    </button>
                 ))
-            }
+            ) : (
+                <p className="text-gray-400 text-center">No suggestions found</p>
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default LocationSearchPanel
+export default memo(LocationSearchPanel);
